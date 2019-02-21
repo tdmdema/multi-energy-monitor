@@ -10,27 +10,42 @@ void setup()
   emon1.current(0, 30);             // Current: input pin, calibration.
   emon2.current(1, 30);
   emon3.current(2, 30);
+
+  emon1.voltage(3, 234.26, 1.7);
+  emon2.voltage(3, 234.26, 1.7);
+  emon3.voltage(3, 234.26, 1.7);
 }
  
 void loop()
 {
-  double Irms1 = emon1.calcIrms(1480);  // Calculate Irms only
-  double Irms2 = emon2.calcIrms(1480);
-  double Irms3 = emon3.calcIrms(1480);
+  emon1.calcVI(20,2000);         // Calculate all. No.of half wavelengths (crossings), time-out
+  emon1.serialprint();           // Print out all variables (realpower, apparent power, Vrms, Irms, power factor)
   
-  Serial.print(Irms1*230.0);         // Apparent power
-  Serial.print(" ");
-  Serial.println(Irms1);          // Irms
+  float realPower1       = emon1.realPower;        //extract Real Power into variable
+  float apparentPower1   = emon1.apparentPower;    //extract Apparent Power into variable
+  float powerFActor1     = emon1.powerFactor;      //extract Power Factor into Variable
+  float supplyVoltage1   = emon1.Vrms;             //extract Vrms into Variable
+  float Irms1            = emon1.Irms;             //extract Irms into Variable
 
-  Serial.print(Irms2*230.0);         // Apparent power
-  Serial.print(" ");
-  Serial.println(Irms2);          // Irms
+
+  emon2.calcVI(20,2000);         // Calculate all. No.of half wavelengths (crossings), time-out
+  emon2.serialprint();           // Print out all variables (realpower, apparent power, Vrms, Irms, power factor)
   
-  Serial.print(Irms3*230.0);         // Apparent power
-  Serial.print(" ");
-  Serial.println(Irms3);          // Irms
+  float realPower2       = emon2.realPower;        //extract Real Power into variable
+  float apparentPower2   = emon2.apparentPower;    //extract Apparent Power into variable
+  float powerFActor2     = emon2.powerFactor;      //extract Power Factor into Variable
+  float supplyVoltage2   = emon2.Vrms;             //extract Vrms into Variable
+  float Irms2            = emon2.Irms;             //extract Irms into Variable
 
-  Serial.println("----------");
+
+  emon3.calcVI(20,2000);         // Calculate all. No.of half wavelengths (crossings), time-out
+  emon3.serialprint();           // Print out all variables (realpower, apparent power, Vrms, Irms, power factor)
+  
+  float realPower3       = emon3.realPower;        //extract Real Power into variable
+  float apparentPower3   = emon3.apparentPower;    //extract Apparent Power into variable
+  float powerFActor3     = emon3.powerFactor;      //extract Power Factor into Variable
+  float supplyVoltage3   = emon3.Vrms;             //extract Vrms into Variable
+  float Irms3            = emon3.Irms;             //extract Irms into Variable
 
 
   

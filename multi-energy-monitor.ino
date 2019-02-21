@@ -6,7 +6,7 @@ EnergyMonitor emon3;
 
 void setup()
 {  
-  Serial.begin(9600);
+  Serial.begin(115200);
   emon1.current(0, 30);             // Current: input pin, calibration.
   emon2.current(1, 30);
   emon3.current(2, 30);
@@ -18,6 +18,8 @@ void setup()
  
 void loop()
 {
+  Serial.println("Sensore1");
+
   emon1.calcVI(20,2000);         // Calculate all. No.of half wavelengths (crossings), time-out
   emon1.serialprint();           // Print out all variables (realpower, apparent power, Vrms, Irms, power factor)
   
@@ -28,6 +30,8 @@ void loop()
   float Irms1            = emon1.Irms;             //extract Irms into Variable
 
 
+  Serial.println("Sensore2");
+
   emon2.calcVI(20,2000);         // Calculate all. No.of half wavelengths (crossings), time-out
   emon2.serialprint();           // Print out all variables (realpower, apparent power, Vrms, Irms, power factor)
   
@@ -37,6 +41,7 @@ void loop()
   float supplyVoltage2   = emon2.Vrms;             //extract Vrms into Variable
   float Irms2            = emon2.Irms;             //extract Irms into Variable
 
+  Serial.println("Sensore3");
 
   emon3.calcVI(20,2000);         // Calculate all. No.of half wavelengths (crossings), time-out
   emon3.serialprint();           // Print out all variables (realpower, apparent power, Vrms, Irms, power factor)
